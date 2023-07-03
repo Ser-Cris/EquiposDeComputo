@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class MysqlConector {
-    final String DBNAME = "animales", USER = "root", PASSWORD = "root", TIMEZONE = "America/Mexico_City", USESSL = "false", PUBLICKEY = "true",
+    final String DBNAME = "BonziBuddy", USER = "root", PASSWORD = "root", TIMEZONE = "America/Mexico_City", USESSL = "false", PUBLICKEY = "true",
             DDLAUTO = "true", HOST = "localhost";
     public Connection connect() {
         String dataSource =
