@@ -61,8 +61,22 @@ public class DaoEquipos implements  DaoRepository{
     }
 
     @Override
-    public boolean update(int id) {
-        return false;
+    public boolean update(int id, Equipos epo) {
+        boolean res=false;
+        MysqlConector conexion = new MysqlConector();
+        Connection con = conexion.connect();
+        try {
+            PreparedStatement stmt= con.prepareStatement("update equipos set nombre=?, marca=?, precio=?, stock=? where id= ?");
+            stmt.setString(1,epo.getNombre());
+            stmt.setString(2,epo.getMarca());
+            stmt.setDouble(3,epo.getPrecio());
+            stmt.setInt(4,epo.getStock());
+            stmt.setInt(5, epo.getId());
+            if(stmt.executeUpdate() > 0) res = true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return res;
     }
 
     @Override

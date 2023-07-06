@@ -27,6 +27,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.jsp">Modificar</a>
+                    <%
+                        Equipos epo = new Equipos(0,"","",0,0);
+                        request.getSession().setAttribute("equipos",epo);
+                    %>
                 </li>
             </ul>
         </div>
@@ -60,7 +64,7 @@
                         <td>${emi.marca}</td>
                         <td>$${emi.precio}</td>
                         <td>${emi.stock}</td>
-                        <td><a class="btn btn-info" HREF="usuario-servlet?id=${emi.id}&operacion=update">#</a></td>
+                        <td><a class="btn btn-info" HREF="admin-servlet?id=${emi.id}&operacion=update">#</a></td>
                         <td><a class="btn btn-danger" HREF="usuario-servlet?id=${emi.id}&operacion=delete">X</a></td>
                     </tr>
                 </c:forEach>

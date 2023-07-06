@@ -4,6 +4,11 @@
   <title>Registro</title>
   <link href="css/bootstrap.css" type="text/css" rel="stylesheet" >
   <script src="js/bootstrap.js" type="text/javascript" ></script>
+  <style>
+    .form-control{
+      border-color: #161719;
+    }
+  </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
@@ -27,41 +32,42 @@
     </div>
   </div>
 </nav>
-<h1 class="h1">Nuevo elemento</h1>
 <br>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-7">
-      <form action="admin-servlet" method="post">
+<div class="container col-12">
+  <div class="row align-self-start">
+    <h1 class="mb-3 row">Nuevo elemento</h1>
+    <div class="col col-4">
+      <form action="admin-servlet" method="post"  class="col-12 form-control fw-bolder" style="background-color: #e3f2fd;">
         <div class="mb-3 row">
-          <label  class="col-sm-3 col-form-label">Nombre:</label>
-          <div class="col-sm-4">
+          <label  class="col-sm-4 col-form-label" >Nombre:</label>
+          <div class="col-sm-8"  >
             <input type="text"  name="nombre" value="${equipos.nombre}" class="form-control">
           </div>
         </div>
         <div class="mb-3 row">
-          <label  class="col-sm-3 col-form-label">Marca:</label>
-          <div class="col-sm-4">
+          <label  class="col-sm-4 col-form-label">Marca:</label>
+          <div class="col-sm-8">
             <input type="text"  name="marca" value="${equipos.marca}" class="form-control">
           </div>
         </div>
         <div class="mb-3 row">
-          <label  class="col-sm-3 col-form-label">Precio:</label>
-          <div class="col-sm-4">
+          <label  class="col-sm-4 col-form-label">Precio:</label>
+          <div class="col-sm-8">
             <input type="number"  name="precio" value="${equipos.precio}" class="form-control">
           </div>
         </div>
         <div class="mb-3 row">
-          <label  class="col-sm-3 col-form-label">Stock:</label>
-          <div class="col-sm-4">
+          <label  class="col-sm-4 col-form-label">Stock:</label>
+          <div class="col-sm-8">
             <input type="number"  name="stock" value="${equipos.stock}" class="form-control">
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-6">
             <input type="submit" name="registro" value="Registrar" class="btn btn-primary">
           </div>
         </div>
+        <input type="hidden" name="id" value="${equipos.id}">
       </form>
     </div>
   </div>

@@ -16,7 +16,16 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String operacion = req.getParameter("operacion");
         String respuesta = "";
+        if (operacion.equals("update")){
+            DaoEquipos dao = new DaoEquipos();
+            int id = Integer.parseInt(req.getParameter("id"));
+            Equipos epo = (Equipos) dao.findOne(id);
+            epo.setId(id);
+            req.getSession().setAttribute("equipos",epo);
 
+            respuesta ="equiposForm.jsp";
+        }
+        resp.sendRedirect(respuesta);
     }
 
     @Override
@@ -27,9 +36,14 @@ public class AdminServlet extends HttpServlet {
         int stock = Integer.parseInt(req.getParameter("stock"));
 
         DaoEquipos dao = new DaoEquipos();
-        Equipos epo = new Equipos(0,nombre,marca,precio,stock);
-        dao.insert(epo);
-        req.getSession().setAttribute("equipos",epo);
+        if(!req.getParameter("id").isEmpty()){
+            int id = Integer.parseInt(req.getParameter("id"));
+            dao.update(id,new Equipos(id,nombre, marca,precio,stock));
+        }else {
+
+            Equipos epo = new Equipos(0, nombre, marca, precio, stock);
+            dao.insert(epo);
+        }
         resp.sendRedirect("index.jsp");
 
     }
