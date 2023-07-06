@@ -9,18 +9,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoEquipos implements  DaoRepository{
+public class DaoEquipos implements DaoRepository {
     @Override
     public List findAll() {
         List<Equipos> listaEquipos = new ArrayList<>();
         MysqlConector con = new MysqlConector();
-        Connection conexion =  con.connect();
+        Connection conexion = con.connect();
 
         try {
             PreparedStatement stmt = conexion.prepareStatement("select * from equipos");
             ResultSet resultado = stmt.executeQuery();
 
-            while (resultado.next()){
+            while (resultado.next()) {
                 Equipos epo = new Equipos();
                 epo.setId(resultado.getInt("id"));
                 epo.setNombre(resultado.getString("nombre"));
@@ -33,7 +33,7 @@ public class DaoEquipos implements  DaoRepository{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return  listaEquipos;
+        return listaEquipos;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DaoEquipos implements  DaoRepository{
         try {
             PreparedStatement stmt =
                     connection.prepareStatement("select * from equipos where id=?");
-            stmt.setInt(1,id);
+            stmt.setInt(1, id);
             ResultSet res = stmt.executeQuery();
             if (res.next()) {
                 epo.setNombre(res.getString("nombre"));
@@ -52,7 +52,7 @@ public class DaoEquipos implements  DaoRepository{
                 epo.setPrecio(res.getDouble("precio"));
                 epo.setStock(res.getInt("stock"));
             } else {
-                epo.setNombre("No existe el usuario con el id: "+id);
+                epo.setNombre("No existe el usuario con el id: " + id);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -62,17 +62,17 @@ public class DaoEquipos implements  DaoRepository{
 
     @Override
     public boolean update(int id, Equipos epo) {
-        boolean res=false;
+        boolean res = false;
         MysqlConector conexion = new MysqlConector();
         Connection con = conexion.connect();
         try {
-            PreparedStatement stmt= con.prepareStatement("update equipos set nombre=?, marca=?, precio=?, stock=? where id= ?");
-            stmt.setString(1,epo.getNombre());
-            stmt.setString(2,epo.getMarca());
-            stmt.setDouble(3,epo.getPrecio());
-            stmt.setInt(4,epo.getStock());
+            PreparedStatement stmt = con.prepareStatement("update equipos set nombre=?, marca=?, precio=?, stock=? where id= ?");
+            stmt.setString(1, epo.getNombre());
+            stmt.setString(2, epo.getMarca());
+            stmt.setDouble(3, epo.getPrecio());
+            stmt.setInt(4, epo.getStock());
             stmt.setInt(5, epo.getId());
-            if(stmt.executeUpdate() > 0) res = true;
+            if (stmt.executeUpdate() > 0) res = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -81,10 +81,25 @@ public class DaoEquipos implements  DaoRepository{
 
     @Override
     public boolean delete(int id) {
-        return false;
+        MysqlConector con = new MysqlConector();
+        Connection conection = con.connect();
+        try {
+            PreparedStatement stmt = conection.prepareStatement("delete from equipos where id=?");
+            stmt.setInt(1, id);
+            int resultado = stmt.executeUpdate();
+            if (resultado != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
-    public boolean insert(Equipos epo){
+    public boolean insert(Equipos epo) {
         boolean resultado = false;
         MysqlConector con = new MysqlConector();
         Connection conection = con.connect();
@@ -93,12 +108,12 @@ public class DaoEquipos implements  DaoRepository{
                     conection.prepareStatement(
                             "insert into equipos(nombre,marca,precio,stock) " +
                                     "values (?,?,?,?)");
-            stmt.setString(1,epo.getNombre());
+            stmt.setString(1, epo.getNombre());
             stmt.setString(2, epo.getMarca());
-            stmt.setDouble(3,epo.getPrecio());
-            stmt.setInt(4,epo.getStock());
+            stmt.setDouble(3, epo.getPrecio());
+            stmt.setInt(4, epo.getStock());
             int res = stmt.executeUpdate();
-            if(res>=1) resultado=true;
+            if (res >= 1) resultado = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
