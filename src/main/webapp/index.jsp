@@ -23,14 +23,10 @@
                     <a class="nav-link active" aria-current="page" href="inicio.jsp">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="equiposForm.jsp">Registro</a>
+                    <a class="nav-link" href="equiposForm2.jsp">Registro</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.jsp">Modificar</a>
-                    <%
-                        Equipos epo = new Equipos(0,"","",0,0);
-                        request.getSession().setAttribute("equipos",epo);
-                    %>
                 </li>
             </ul>
         </div>
@@ -84,5 +80,6 @@
         </div>
     </div>
 </div>
+<% request.getSession().removeAttribute("equipos");%>
 </body>
 </html>
