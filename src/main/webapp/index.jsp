@@ -61,7 +61,7 @@
                         <td>$${emi.precio}</td>
                         <td>${emi.stock}</td>
                         <td><a class="btn btn-info" HREF="admin-servlet?id=${emi.id}&operacion=update">#</a></td>
-                        <td><a class="btn btn-danger" HREF="usuario-servlet?id=${emi.id}&operacion=delete">X</a></td>
+                        <td><a class="btn btn-danger" HREF="admin-servlet?id=${emi.id}&operacion=delete">X</a></td>
                     </tr>
                 </c:forEach>
 

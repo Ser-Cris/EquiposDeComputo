@@ -24,6 +24,10 @@ public class AdminServlet extends HttpServlet {
             req.getSession().setAttribute("equipos",epo);
 
             respuesta ="equiposForm.jsp";
+        } else if (operacion.equals("delete")) {
+            DaoEquipos dao = new DaoEquipos();
+            dao.delete(Integer.parseInt(req.getParameter("id")));
+            respuesta = "index.jsp";
         }
         resp.sendRedirect(respuesta);
     }
